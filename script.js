@@ -234,4 +234,21 @@ hourlySection.innerHTML = hourlyHtml;
 
 
 
+function celsiusToFahrenheit(celsius) {
+  return (celsius * 9/5) + 32;
+}
+
+const celsiusButton = document.getElementById('celsius-button');
+const fahrenheitButton = document.getElementById('fahrenheit-button');
+
+celsiusButton.addEventListener('click', () => {
+  // Display temperature in Celsius
+  temperatureDisplay.textContent = `${Math.round(weatherData.main.temp)}°C`;
+});
+
+fahrenheitButton.addEventListener('click', () => {
+  // Convert Celsius to Fahrenheit and display temperature
+  const fahrenheitTemp = celsiusToFahrenheit(weatherData.main.temp);
+  temperatureDisplay.textContent = `${Math.round(fahrenheitTemp)}°F`;
+});
 
