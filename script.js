@@ -1,5 +1,6 @@
 const API_KEY = 'a720604bcb53aba9e538c4f2385e1a29';
 
+
 // Keep track of the user's previous location
 let previousLocation = '';
 
@@ -233,6 +234,8 @@ hourlySection.innerHTML = hourlyHtml;
 }
 
 
+let currentUnit = 'Celsius';
+
 
 function celsiusToFahrenheit(celsius) {
   return (celsius * 9/5) + 32;
@@ -252,3 +255,31 @@ fahrenheitButton.addEventListener('click', () => {
   temperatureDisplay.textContent = `${Math.round(fahrenheitTemp)}°F`;
 });
 
+const celsiusBtn = document.querySelector('#celsius-button');
+const fahrenheitBtn = document.querySelector('#fahrenheit-button');
+
+const temperature = document.querySelector('#temperature');
+
+celsiusBtn.addEventListener('click', function() {
+  if (currentUnit !== 'Celsius') {
+    const celsiusTemp = fahrenheitToCelsius(parseFloat(temperature.innerText));
+    temperature.innerText = `${celsiusTemp.toFixed(1)} °C`;
+    currentUnit = 'Celsius';
+  }
+});
+
+fahrenheitBtn.addEventListener('click', function() {
+  if (currentUnit !== 'Fahrenheit') {
+    const fahrenheitTemp = celsiusToFahrenheit(parseFloat(temperature.innerText));
+    temperature.innerText = `${fahrenheitTemp.toFixed(1)} °F`;
+    currentUnit = 'Fahrenheit';
+  }
+});
+
+function celsiusToFahrenheit(celsius) {
+  return (celsius * 1.8) + 32;
+}
+
+function fahrenheitToCelsius(fahrenheit) {
+  return (fahrenheit - 32) * 5 / 9;
+}
